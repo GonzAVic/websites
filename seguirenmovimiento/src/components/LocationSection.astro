@@ -1,0 +1,61 @@
+---
+import { getContent } from "../data";
+
+const { site, ui } = getContent(Astro.currentLocale);
+---
+
+<section id="direccion" class="bg-canvas-soft py-20">
+  <div class="mx-auto grid max-w-6xl gap-10 px-5 sm:px-8 lg:grid-cols-[0.9fr_1.1fr]">
+    <div>
+      <span class="text-sm font-semibold uppercase tracking-wide text-brand-600"
+        >{ui.address.eyebrow}</span
+      >
+      <h2 class="mt-2 font-display text-2xl font-bold text-ink sm:text-3xl">
+        {ui.address.heading}
+      </h2>
+      <a
+        href={site.address.mapsUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-4 inline-flex items-start gap-2 text-base font-medium text-ink transition-colors hover:text-brand-600"
+      >
+        <svg viewBox="0 0 24 24" fill="none" class="mt-0.5 h-5 w-5 shrink-0">
+          <path
+            d="M12 21s7-6.6 7-11.6A7 7 0 0 0 5 9.4C5 14.4 12 21 12 21Z"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linejoin="round"></path>
+          <circle cx="12" cy="9.5" r="2.5" stroke="currentColor" stroke-width="1.6"
+          ></circle>
+        </svg>
+        <span>{site.address.street}<br />{site.address.city}</span>
+      </a>
+
+      <div class="mt-8 rounded-2xl border border-line bg-surface p-6 shadow-card">
+        <h3 class="font-display text-sm font-semibold text-ink">
+          {ui.address.workingHours}
+        </h3>
+        <dl class="mt-4 flex flex-col gap-2 text-sm">
+          {
+            site.workingHours.map((row) => (
+              <div class="flex items-center justify-between border-b border-line/70 pb-2 last:border-0 last:pb-0">
+                <dt class="text-ink-soft">{row.day}</dt>
+                <dd class="font-medium text-ink">{row.hours}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+
+    <div class="overflow-hidden rounded-3xl border border-line shadow-card">
+      <iframe
+        src={site.address.embedUrl}
+        title={`${site.address.street}, ${site.address.city}`}
+        class="h-80 w-full border-0 lg:h-full"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </div>
+  </div>
+</section>

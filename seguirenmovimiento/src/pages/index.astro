@@ -1,0 +1,29 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import Services from "../components/Services.astro";
+import About from "../components/About.astro";
+import Credentials from "../components/Credentials.astro";
+import Reviews from "../components/Reviews.astro";
+import LocationSection from "../components/LocationSection.astro";
+import Footer from "../components/Footer.astro";
+import MobileCta from "../components/MobileCta.astro";
+---
+
+<Layout
+  title="Karla Aracelly González Arana | Rehabilitación Vestibular en Mérida"
+  description="Fisioterapeuta especializada en rehabilitación vestibular avanzada, certificada por la Universidad de Pittsburgh. Trata el vértigo, mareo y desequilibrio de forma presencial en Mérida o por videoconsulta."
+>
+  <Header />
+  <main class="pb-20 md:pb-0">
+    <Hero />
+    <Services />
+    <About />
+    <Credentials />
+    <Reviews />
+    <LocationSection />
+  </main>
+  <Footer />
+  <MobileCta />
+</Layout>

@@ -1,0 +1,78 @@
+---
+import { getContent } from "../data";
+import { withBase } from "../utils/paths";
+
+const { site, sessionTypes, ui } = getContent(Astro.currentLocale);
+---
+
+<section id="servicios" class="mx-auto max-w-6xl scroll-mt-24 px-5 py-20 sm:px-8">
+  <div class="mb-14 max-w-2xl">
+    <span class="text-sm font-semibold uppercase tracking-wide text-brand-600"
+      >{ui.services.eyebrow}</span
+    >
+    <h2 class="mt-2 font-display text-2xl font-bold text-ink sm:text-3xl">
+      {ui.services.heading}
+    </h2>
+    <p class="mt-3 text-base text-ink-soft">
+      {ui.services.subheading}
+    </p>
+  </div>
+
+  <div class="flex flex-col divide-y divide-line">
+    {
+      sessionTypes.map((session, index) => {
+        const reversed = index % 2 === 1;
+        return (
+          <article class="grid items-center gap-8 py-12 first:pt-0 last:pb-0 lg:grid-cols-2 lg:gap-16">
+            <div
+              class={`overflow-hidden rounded-3xl border border-line shadow-card ${reversed ? "lg:order-2" : ""}`}
+            >
+              <img
+                src={withBase(session.image)}
+                alt={session.title}
+                class="aspect-[4/3] w-full object-cover"
+                loading="lazy"
+              />
+            </div>
+
+            <div class={reversed ? "lg:order-1" : ""}>
+              <h3 class="font-display text-xl font-bold leading-snug text-ink sm:text-2xl">
+                {session.title}
+              </h3>
+
+              <p class="mt-3 text-base leading-relaxed text-ink-soft">
+                {session.description}
+              </p>
+
+              <div class="mt-6 grid gap-3 sm:grid-cols-2">
+                {session.modalities.map((modality) => (
+                  <div class="flex flex-col gap-3 rounded-2xl border border-line bg-surface p-4">
+                    <span class="inline-flex w-fit items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-700">
+                      {modality.icon} {modality.label}
+                    </span>
+                    <div class="flex items-baseline gap-2">
+                      <span class="font-display text-lg font-bold text-ink">
+                        {modality.price}
+                      </span>
+                      <span class="text-sm text-ink-soft">
+                        · {modality.duration}
+                      </span>
+                    </div>
+                    <a
+                      href={site.bookingUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center justify-center gap-1.5 rounded-full bg-brand-500 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-600"
+                    >
+                      {ui.bookNow}
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </article>
+        );
+      })
+    }
+  </div>
+</section>

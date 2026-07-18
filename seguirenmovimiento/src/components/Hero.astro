@@ -1,0 +1,99 @@
+---
+import { getContent } from "../data";
+import { withBase } from "../utils/paths";
+
+const { site, ui } = getContent(Astro.currentLocale);
+---
+
+<section id="top" class="relative overflow-hidden bg-canvas">
+  <div
+    class="pointer-events-none absolute -top-24 right-[-10rem] h-[32rem] w-[32rem] rounded-full bg-brand-100/70 blur-3xl"
+  >
+  </div>
+  <div
+    class="pointer-events-none absolute bottom-[-8rem] left-[-6rem] h-72 w-72 rounded-full bg-accent-100/60 blur-3xl"
+  >
+  </div>
+
+  <div
+    class="relative mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:py-24"
+  >
+    <div>
+      <div class="flex items-center gap-2 text-sm font-medium text-ink-soft">
+        <span class="flex items-center gap-1">
+          {
+            Array.from({ length: 5 }).map(() => (
+              <svg
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="h-4 w-4 text-accent-500"
+              >
+                <path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.1 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.1 6.1-.7z" />
+              </svg>
+            ))
+          }
+        </span>
+        <span
+          >{site.rating.average.toFixed(1)} · {site.rating.count} {ui.reviewsOnGoogle}</span
+        >
+      </div>
+
+      <h1
+        class="mt-5 max-w-xl font-display text-3xl font-bold leading-tight text-ink sm:text-4xl lg:text-5xl"
+      >
+        {site.tagline}
+      </h1>
+      <p class="mt-5 max-w-xl text-lg text-ink-soft sm:text-xl">
+        {site.certification}. {site.bio}
+      </p>
+
+      <div class="mt-8 flex flex-wrap items-center gap-4">
+        <a
+          href={site.bookingUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="rounded-full bg-accent-500 px-7 py-3.5 text-base font-semibold text-white shadow-soft transition-colors hover:bg-accent-600"
+        >
+          {ui.bookAppointment}
+        </a>
+        <a
+          href={site.whatsapp}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="rounded-full border border-line bg-surface px-7 py-3.5 text-base font-semibold text-ink transition-colors hover:border-brand-300 hover:text-brand-600"
+        >
+          {ui.whatsappCta}
+        </a>
+      </div>
+    </div>
+
+    <div class="relative mx-auto w-full max-w-sm lg:max-w-none">
+      <div
+        class="absolute -inset-6 -z-10 rounded-[3rem] bg-gradient-to-br from-brand-100 via-brand-50 to-accent-100 sm:-inset-8"
+      >
+      </div>
+      <div
+        class="overflow-hidden rounded-[2.5rem] border-8 border-surface shadow-soft"
+      >
+        <img
+          src={withBase("/images/karla-hero.png")}
+          alt={`${site.shortName}, ${site.tagline}`}
+          class="aspect-[2/3] w-full object-cover"
+          width="987"
+          height="1481"
+        />
+      </div>
+      <div
+        class="absolute -bottom-5 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full border border-line bg-surface px-5 py-3 shadow-card sm:-right-6 sm:left-auto sm:translate-x-0"
+      >
+        <span class="flex h-9 w-9 items-center justify-center rounded-full bg-brand-50 text-base"
+          >🌀</span
+        >
+        <div class="leading-tight">
+          <p class="font-display text-sm font-bold text-ink">{site.shortName}</p>
+          <p class="text-xs text-ink-soft">{ui.heroBadgeRole}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

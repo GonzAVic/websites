@@ -1,0 +1,140 @@
+---
+import { getContent } from "../data";
+import { withBase } from "../utils/paths";
+
+const { about, site, ui } = getContent(Astro.currentLocale);
+---
+
+<section
+  id="acerca-de"
+  class="scroll-mt-24 bg-canvas-soft py-20"
+>
+  <div class="mx-auto grid max-w-6xl gap-12 px-5 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+    <div>
+      <span class="text-sm font-semibold uppercase tracking-wide text-brand-600"
+        >{ui.about.eyebrow}</span
+      >
+      <h2 class="mt-2 font-display text-2xl font-bold text-ink sm:text-3xl">
+        {about.heading}
+      </h2>
+      {
+        about.paragraphs.map((paragraph) => (
+          <p class="mt-4 max-w-xl text-base leading-relaxed text-ink-soft">
+            {paragraph}
+          </p>
+        ))
+      }
+
+      <div class="mt-6 inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-4 py-2 text-sm font-medium text-brand-700">
+        <svg viewBox="0 0 24 24" fill="none" class="h-4 w-4 shrink-0">
+          <path
+            d="M12 3 3 7.5l9 4.5 9-4.5L12 3Zm-6.5 6.2V15c0 1.5 2.9 3.5 6.5 3.5s6.5-2 6.5-3.5V9.2"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+        {about.credential}
+      </div>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a
+          href={`mailto:${site.email}`}
+          class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-2.5 text-sm font-medium text-ink transition-colors hover:border-brand-300 hover:text-brand-600"
+        >
+          <svg viewBox="0 0 24 24" fill="none" class="h-4 w-4">
+            <path
+              d="M4 6h16v12H4V6Zm0 0 8 7 8-7"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+          {site.email}
+        </a>
+        <a
+          href={site.whatsapp}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-2.5 text-sm font-medium text-ink transition-colors hover:border-brand-300 hover:text-brand-600"
+        >
+          <svg viewBox="0 0 24 24" fill="none" class="h-4 w-4">
+            <path
+              d="M20.5 11.9a8.4 8.4 0 0 1-12.2 7.5L4 20.5l.8-4.1a8.4 8.4 0 1 1 15.7-4.5Z"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+          {ui.whatsappLabel}
+        </a>
+      </div>
+
+      <div class="mt-8 flex items-center gap-3">
+        <span class="text-sm font-medium text-ink-soft">{ui.followUs}</span>
+        <div class="flex items-center gap-2">
+          <a
+            href={site.social.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+            class="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface text-ink transition-colors hover:border-brand-300 hover:text-brand-600"
+          >
+            <svg viewBox="0 0 24 24" fill="none" class="h-4.5 w-4.5">
+              <rect
+                x="3.5"
+                y="3.5"
+                width="17"
+                height="17"
+                rx="5"
+                stroke="currentColor"
+                stroke-width="1.6"></rect>
+              <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"
+              ></circle>
+              <circle cx="17" cy="7" r="1" fill="currentColor"></circle>
+            </svg>
+          </a>
+          <a
+            href={site.social.facebook}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Facebook"
+            class="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface text-ink transition-colors hover:border-brand-300 hover:text-brand-600"
+          >
+            <svg viewBox="0 0 24 24" fill="none" class="h-4.5 w-4.5">
+              <path
+                d="M14 9h2.5V6H14c-2 0-3.5 1.6-3.5 3.5V11H8v3h2.5v6h3v-6H16l.5-3h-3V9.6c0-.4.3-.6.5-.6Z"
+                stroke="currentColor"
+                stroke-width="1.4"
+                stroke-linejoin="round"></path>
+            </svg>
+          </a>
+          <a
+            href={site.social.tiktok}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="TikTok"
+            class="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface text-ink transition-colors hover:border-brand-300 hover:text-brand-600"
+          >
+            <svg viewBox="0 0 24 24" fill="none" class="h-4.5 w-4.5">
+              <path
+                d="M14 4v9.5a2.75 2.75 0 1 1-2-2.65M14 4c.2 1.8 1.5 3.2 3.3 3.5"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="rounded-3xl border border-line bg-surface p-2 shadow-card">
+      <img
+        src={withBase("/images/servicio-presencial.jpeg")}
+        alt={ui.about.imageAlt}
+        class="aspect-square w-full rounded-2xl object-cover"
+      />
+    </div>
+  </div>
+</section>

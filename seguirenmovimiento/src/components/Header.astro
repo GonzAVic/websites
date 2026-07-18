@@ -1,0 +1,97 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { getContent, locales } from "../data";
+import { withBase } from "../utils/paths";
+
+const locale = Astro.currentLocale ?? "es";
+const { site, ui } = getContent(locale);
+
+const links = [
+  { href: "#servicios", label: ui.nav.services },
+  { href: "#acerca-de", label: ui.nav.about },
+  { href: "#credenciales", label: ui.nav.credentials },
+  { href: "#resenas", label: ui.nav.reviews },
+  { href: "#direccion", label: ui.nav.address },
+];
+---
+
+<header
+  class="sticky top-0 z-40 border-b border-line/70 bg-canvas/90 backdrop-blur"
+>
+  <div
+    class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3 sm:px-8"
+  >
+    <a href="#top" class="flex items-center gap-3">
+      <img
+        src={withBase("/images/logo.png")}
+        alt={`${ui.logoAlt} ${site.name}`}
+        width="44"
+        height="44"
+        class="h-11 w-11 rounded-full object-cover ring-2 ring-brand-100"
+      />
+      <span class="hidden font-display text-sm font-semibold text-ink sm:block"
+        >{site.name}</span
+      >
+    </a>
+
+    <nav class="hidden items-center gap-7 md:flex">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class="text-sm font-medium text-ink-soft transition-colors hover:text-brand-600"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <div
+        class="flex items-center gap-1 rounded-full border border-line p-1 text-xs font-semibold"
+        aria-label={ui.langSwitchLabel}
+      >
+        {
+          locales.map((loc) => (
+            <a
+              href={getRelativeLocaleUrl(loc, "")}
+              aria-current={locale === loc ? "page" : undefined}
+              class={`rounded-full px-2.5 py-1 uppercase transition-colors ${
+                locale === loc
+                  ? "bg-brand-500 text-white"
+                  : "text-ink-soft hover:text-brand-600"
+              }`}
+            >
+              {loc}
+            </a>
+          ))
+        }
+      </div>
+
+      <a
+        href={site.bookingUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="rounded-full bg-brand-500 px-5 py-2.5 text-sm font-semibold text-white shadow-card transition-colors hover:bg-brand-600"
+      >
+        {ui.bookNow}
+      </a>
+    </div>
+  </div>
+
+  <nav
+    class="flex items-center gap-5 overflow-x-auto border-t border-line/70 px-5 py-2 text-sm font-medium text-ink-soft md:hidden"
+  >
+    {
+      links.map((link) => (
+        <a
+          href={link.href}
+          class="shrink-0 whitespace-nowrap transition-colors hover:text-brand-600"
+        >
+          {link.label}
+        </a>
+      ))
+    }
+  </nav>
+</header>
