@@ -6,7 +6,7 @@ const { site, ui } = getContent(Astro.currentLocale);
 
 <section id="direccion" class="bg-canvas-soft py-20">
   <div class="mx-auto grid max-w-6xl gap-10 px-5 sm:px-8 lg:grid-cols-[0.9fr_1.1fr]">
-    <div>
+    <div data-reveal>
       <span class="text-sm font-semibold uppercase tracking-wide text-brand-600"
         >{ui.address.eyebrow}</span
       >
@@ -48,7 +48,11 @@ const { site, ui } = getContent(Astro.currentLocale);
       </div>
     </div>
 
-    <div class="overflow-hidden rounded-3xl border border-line shadow-card">
+    <div
+      data-reveal
+      style="--reveal-delay: 120"
+      class="overflow-hidden rounded-3xl border border-line shadow-card"
+    >
       <iframe
         src={site.address.embedUrl}
         title={`${site.address.street}, ${site.address.city}`}

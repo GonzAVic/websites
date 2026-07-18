@@ -6,7 +6,7 @@ const { site, sessionTypes, ui } = getContent(Astro.currentLocale);
 ---
 
 <section id="servicios" class="mx-auto max-w-6xl scroll-mt-24 px-5 py-20 sm:px-8">
-  <div class="mb-14 max-w-2xl">
+  <div data-reveal class="mb-14 max-w-2xl">
     <span class="text-sm font-semibold uppercase tracking-wide text-brand-600"
       >{ui.services.eyebrow}</span
     >
@@ -23,7 +23,11 @@ const { site, sessionTypes, ui } = getContent(Astro.currentLocale);
       sessionTypes.map((session, index) => {
         const reversed = index % 2 === 1;
         return (
-          <article class="grid items-center gap-8 py-12 first:pt-0 last:pb-0 lg:grid-cols-2 lg:gap-16">
+          <article
+            data-reveal
+            style={`--reveal-delay: ${index * 80}`}
+            class="grid items-center gap-8 py-12 first:pt-0 last:pb-0 lg:grid-cols-2 lg:gap-16"
+          >
             <div
               class={`overflow-hidden rounded-3xl border border-line shadow-card ${reversed ? "lg:order-2" : ""}`}
             >

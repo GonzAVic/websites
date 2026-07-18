@@ -19,7 +19,11 @@ const { site, ui } = getContent(Astro.currentLocale);
     class="relative mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:py-24"
   >
     <div>
-      <div class="flex items-center gap-2 text-sm font-medium text-ink-soft">
+      <div
+        data-reveal
+        style="--reveal-delay: 0"
+        class="flex items-center gap-2 text-sm font-medium text-ink-soft"
+      >
         <span class="flex items-center gap-1">
           {
             Array.from({ length: 5 }).map(() => (
@@ -39,15 +43,25 @@ const { site, ui } = getContent(Astro.currentLocale);
       </div>
 
       <h1
+        data-reveal
+        style="--reveal-delay: 80"
         class="mt-5 max-w-xl font-display text-3xl font-bold leading-tight text-ink sm:text-4xl lg:text-5xl"
       >
         {site.tagline}
       </h1>
-      <p class="mt-5 max-w-xl text-lg text-ink-soft sm:text-xl">
+      <p
+        data-reveal
+        style="--reveal-delay: 160"
+        class="mt-5 max-w-xl text-lg text-ink-soft sm:text-xl"
+      >
         {site.certification}. {site.bio}
       </p>
 
-      <div class="mt-8 flex flex-wrap items-center gap-4">
+      <div
+        data-reveal
+        style="--reveal-delay: 240"
+        class="mt-8 flex flex-wrap items-center gap-4"
+      >
         <a
           href={site.bookingUrl}
           target="_blank"
@@ -67,7 +81,11 @@ const { site, ui } = getContent(Astro.currentLocale);
       </div>
     </div>
 
-    <div class="relative mx-auto w-full max-w-sm lg:max-w-none">
+    <div
+      data-reveal
+      style="--reveal-delay: 120"
+      class="relative mx-auto w-full max-w-sm lg:max-w-none"
+    >
       <div
         class="absolute -inset-6 -z-10 rounded-[3rem] bg-gradient-to-br from-brand-100 via-brand-50 to-accent-100 sm:-inset-8"
       >

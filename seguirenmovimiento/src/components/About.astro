@@ -10,7 +10,7 @@ const { about, site, ui } = getContent(Astro.currentLocale);
   class="scroll-mt-24 bg-canvas-soft py-20"
 >
   <div class="mx-auto grid max-w-6xl gap-12 px-5 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-    <div>
+    <div data-reveal>
       <span class="text-sm font-semibold uppercase tracking-wide text-brand-600"
         >{ui.about.eyebrow}</span
       >
@@ -129,7 +129,11 @@ const { about, site, ui } = getContent(Astro.currentLocale);
       </div>
     </div>
 
-    <div class="rounded-3xl border border-line bg-surface p-2 shadow-card">
+    <div
+      data-reveal
+      style="--reveal-delay: 120"
+      class="rounded-3xl border border-line bg-surface p-2 shadow-card"
+    >
       <img
         src={withBase("/images/servicio-presencial.jpeg")}
         alt={ui.about.imageAlt}
