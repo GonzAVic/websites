@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import Section from '../components/astro/Section.astro'
+import Card from '../components/astro/Card.astro'
+import Button from '../components/astro/Button.astro'
+import FaqAccordion from '../components/react/FaqAccordion'
+import HeroGhost from '../components/react/HeroGhost'
+import MoodDemo from '../components/react/MoodDemo'
+import GlitchWindow from '../components/react/GlitchWindow'
+import { CHROME_STORE_URL } from '../content/links'
+import {
+  hero,
+  howItWorks,
+  features,
+  glitchShowcase,
+  privacy,
+  privacyPolicy,
+  faq,
+  finalCta,
+} from '../content/copy'
+
+const title = 'Split — a ghost that lives in your tabs'
+const description =
+  'Your browser has a ghost. It gets more chaotic with every tab you open. Split lives on your new tab page and reacts in real time — plus a real tab manager, workspaces, and tab parking to actually do something about it.'
+---
+
+<BaseLayout title={title} description={description}>
+	<main>
+		<Section class="pt-16 sm:pt-24">
+			<div class="flex flex-col-reverse items-center gap-12 lg:flex-row lg:justify-between">
+				<div class="max-w-xl text-center lg:text-left">
+					<p class="text-xs uppercase tracking-widest text-brand-dim">{hero.eyebrow}</p>
+					<h1 class="mt-4 text-3xl font-black tracking-tight text-brand-heading sm:text-4xl md:text-5xl">
+						{hero.headline}
+					</h1>
+					<p class="mt-6 text-base text-brand-dim">{hero.subheadline}</p>
+					<div class="mt-10 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
+						<Button href={CHROME_STORE_URL} target="_blank" rel="noopener noreferrer">
+							{hero.primaryCta}
+						</Button>
+						<Button href={hero.secondaryCta.href} variant="ghost">
+							{hero.secondaryCta.label}
+						</Button>
+					</div>
+				</div>
+				<div class="shrink-0">
+					<HeroGhost client:load />
+				</div>
+			</div>
+		</Section>
+
+		<Section id="how-it-works" class="border-t border-brand-border">
+			<h2 class="text-xl font-bold text-brand-heading sm:text-2xl">{howItWorks.heading}</h2>
+			<p class="mt-4 max-w-2xl text-brand-dim">{howItWorks.intro}</p>
+			<div class="mt-8">
+				<MoodDemo client:visible moods={howItWorks.moods} />
+			</div>
+			<p class="mt-8 max-w-2xl text-sm text-brand-dim">{howItWorks.glitchNote}</p>
+		</Section>
+
+		<Section id="features" class="border-t border-brand-border">
+			<h2 class="text-xl font-bold text-brand-heading sm:text-2xl">{features.heading}</h2>
+			<div class="mt-8 grid gap-4 sm:grid-cols-2">
+				{
+					features.items.map((f) => (
+						<Card>
+							<div class="flex items-center gap-3">
+								<span class="text-xl text-mood-calm" aria-hidden="true">{f.icon}</span>
+								<h3 class="font-bold uppercase tracking-wide text-brand-heading">{f.title}</h3>
+							</div>
+							<p class="mt-2 text-sm text-brand-dim">{f.description}</p>
+						</Card>
+					))
+				}
+			</div>
+		</Section>
+
+		<Section class="border-t border-brand-border">
+			<h2 class="text-xl font-bold text-brand-heading sm:text-2xl">{glitchShowcase.heading}</h2>
+			<p class="mt-4 max-w-2xl text-brand-dim">{glitchShowcase.intro}</p>
+			<div class="mt-10">
+				<GlitchWindow client:visible page={glitchShowcase.mockPage} />
+			</div>
+		</Section>
+
+		<Section id="privacy" class="border-t border-brand-border">
+			<h2 class="text-xl font-bold text-brand-heading sm:text-2xl">{privacy.heading}</h2>
+			<p class="mt-4 max-w-2xl text-brand-dim">{privacy.body}</p>
+
+			<Card class="mt-8 max-w-2xl border-l-2 border-l-mood-calm">
+				<p class="text-brand-text">{privacyPolicy.summary}</p>
+			</Card>
+
+			<ul class="mt-6 max-w-2xl list-disc space-y-2 pl-5 text-sm text-brand-dim">
+				{privacyPolicy.points.map((point) => (
+					<li>{point}</li>
+				))}
+			</ul>
+
+			<p class="mt-6 text-xs text-brand-dim">Last updated {privacyPolicy.updated}</p>
+		</Section>
+
+		<Section id="faq" class="border-t border-brand-border">
+			<h2 class="text-xl font-bold text-brand-heading sm:text-2xl">{faq.heading}</h2>
+			<div class="mt-8">
+				<FaqAccordion client:load items={faq.items} />
+			</div>
+		</Section>
+
+		<Section class="border-t border-brand-border text-center">
+			<h2 class="text-2xl font-black text-brand-heading sm:text-3xl">{finalCta.heading}</h2>
+			<p class="mx-auto mt-4 max-w-xl text-brand-dim">{finalCta.body}</p>
+			<div class="mt-8">
+				<Button href={CHROME_STORE_URL} target="_blank" rel="noopener noreferrer">
+					{finalCta.cta}
+				</Button>
+			</div>
+		</Section>
+	</main>
+</BaseLayout>

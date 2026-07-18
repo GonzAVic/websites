@@ -1,0 +1,18 @@
+---
+import Container from './Container.astro'
+import { FEEDBACK_FORM_URL, CONTACT_EMAIL } from '../../content/links'
+import { withBase } from '../../utils/paths'
+---
+
+<footer class="border-t border-brand-border py-10">
+  <Container class="flex flex-col items-center gap-4 text-sm text-brand-dim sm:flex-row sm:justify-between">
+    <p>Split — 100% local, no accounts, no servers.</p>
+    <nav class="flex items-center gap-6">
+      <a href={FEEDBACK_FORM_URL} target="_blank" rel="noopener noreferrer" class="hover:text-brand-heading">
+        Feedback
+      </a>
+      <a href={`mailto:${CONTACT_EMAIL}`} class="hover:text-brand-heading">Contact</a>
+      <a href={withBase('/#privacy')} class="hover:text-brand-heading">Privacy</a>
+    </nav>
+  </Container>
+</footer>

@@ -1,0 +1,22 @@
+---
+// Maps a mood name to its color from tokens/colors.ts, via Badge's `tone`
+// variant (kept in lockstep with MOOD_COLORS keys). Reused in the hero and
+// the "how it works" mood ladder.
+import Badge from './Badge.astro'
+import type { Mood } from '../../tokens/colors'
+
+interface Props {
+  mood: Mood
+  range?: string
+  class?: string
+}
+
+const { mood, range, class: className } = Astro.props
+const label = mood.charAt(0).toUpperCase() + mood.slice(1)
+---
+
+<Badge tone={mood} class={className}>
+  <span class="h-1.5 w-1.5 rounded-full bg-current"></span>
+  {label}
+  {range && <span class="text-brand-dim normal-case tracking-normal">— {range}</span>}
+</Badge>

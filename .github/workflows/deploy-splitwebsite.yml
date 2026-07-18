@@ -1,0 +1,54 @@
+name: Deploy splitwebsite
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "splitwebsite/**"
+      - ".github/workflows/deploy-splitwebsite.yml"
+  workflow_dispatch: {}
+
+# Evita despliegues simultáneos pisándose entre sí.
+concurrency:
+  group: deploy-splitwebsite
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout websites (monorepo)
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: splitwebsite/package-lock.json
+
+      - name: Install dependencies
+        working-directory: splitwebsite
+        run: npm ci
+
+      - name: Build
+        working-directory: splitwebsite
+        env:
+          # Mientras no haya dominio propio, el sitio vive bajo
+          # https://<usuario>.github.io/splitwebsite/ y necesita este
+          # base path. Cuando agregues un dominio en Hostinger, borra
+          # esta línea (o déjala vacía) y añade SITE_URL abajo.
+          BASE_PATH: /splitwebsite/
+        run: npm run build
+
+      # Publica el contenido de dist/ en la rama gh-pages del repo
+      # "splitwebsite" (repo de despliegue, separado del monorepo).
+      - name: Deploy to splitwebsite (gh-pages)
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          personal_token: ${{ secrets.DEPLOY_PAT }}
+          external_repository: ${{ github.repository_owner }}/splitwebsite
+          publish_branch: gh-pages
+          publish_dir: ./splitwebsite/dist
+          user_name: "github-actions[bot]"
+          user_email: "github-actions[bot]@users.noreply.github.com"

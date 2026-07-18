@@ -1,0 +1,15 @@
+---
+import { badgeVariants, type BadgeVariants } from './badge-variants'
+import { cn } from '../../lib/cn'
+
+interface Props extends BadgeVariants {
+  class?: string
+}
+
+const { tone, class: className } = Astro.props
+const classes = cn(badgeVariants({ tone }), className)
+---
+
+<span class={classes}>
+  <slot />
+</span>
