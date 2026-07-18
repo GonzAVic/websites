@@ -34,11 +34,9 @@ jobs:
       - name: Build
         working-directory: seguirenmovimiento
         env:
-          # Mientras no haya dominio propio, el sitio vive bajo
-          # https://<usuario>.github.io/seguirenmovimiento/ y necesita
-          # este base path. Cuando agregues un dominio en Hostinger,
-          # borra esta línea (o déjala vacía) y añade SITE_URL abajo.
-          BASE_PATH: /seguirenmovimiento/
+          # Dominio propio (seguirenmovimiento.mx) configurado en Hostinger:
+          # el sitio ahora vive en la raíz, sin subruta.
+          SITE_URL: https://seguirenmovimiento.mx
         run: npm run build
 
       # Publica el contenido de dist/ en la rama gh-pages del repo
